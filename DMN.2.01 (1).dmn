@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_3BEE4E1E-4BDA-4F3C-80FA-63BF2FC86029" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_E8671871-9422-478A-A783-3810673B7B49" name="Untitled" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_3BEE4E1E-4BDA-4F3C-80FA-63BF2FC86029">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_F877D5D6-F857-4975-8AEC-7D248BE68A8C" name="jerarquia" isCollection="false">
+    <dmn:typeRef>string</dmn:typeRef>
+    <dmn:allowedValues kie:constraintType="enumeration" id="_2B329099-6CB0-478B-B771-5C796D09A26A">
+      <dmn:text>"Senior", "SemiSenior", "Junior"</dmn:text>
+    </dmn:allowedValues>
+  </dmn:itemDefinition>
+  <dmn:decision id="_329FDA71-5E19-4DE5-A306-8AC49207DD78" name="Días Vacaciones">
+    <dmn:extensionElements/>
+    <dmn:variable id="_20434014-3FA3-4A7E-85DC-5B65C96D725B" name="Días Vacaciones" typeRef="number"/>
+    <dmn:informationRequirement id="_EC6054A4-D6B4-485C-ADC6-D232DB1C0478">
+      <dmn:requiredInput href="#_CBD9BEC5-7ED0-48A8-BA83-480D174255D0"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_E61E9D07-155F-4AD0-9C25-D36585F5EDE3">
+      <dmn:requiredInput href="#_500A112F-544A-4C76-B7F5-297509E6A49A"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_FD7E32E7-75BB-493C-9AEB-389B7C74C0D4" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_27D3FC4F-F374-4261-9821-332373EA547E">
+        <dmn:inputExpression id="_7F804876-C2FB-4189-9D92-A40A96CB4B7A" typeRef="number">
+          <dmn:text>antig</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_E69D1CD9-8846-4993-9FCC-10A08CBF07C3">
+        <dmn:inputExpression id="_040D3D1D-7C46-4E1C-8002-3B135FC7281A" typeRef="jerarquia">
+          <dmn:text>jerarquía</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_96BC2681-7969-4F40-B1F1-D62C53CC507D">
+        <dmn:defaultOutputEntry id="_AB119EEC-4A2F-4F71-8D26-E278FB386D4D">
+          <dmn:text>14</dmn:text>
+        </dmn:defaultOutputEntry>
+      </dmn:output>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_EE5CD0D5-364A-4755-9769-47DBA6C8505C">
+        <dmn:inputEntry id="_5D16BF35-072E-47CC-81E2-C3DD7302A368">
+          <dmn:text>&lt;5</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_2BFBB428-66FE-46E2-993F-90BE4EFC1420">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_110E3B62-47D4-4FF1-AD49-F698C6641E52">
+          <dmn:text>14</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_09CE5891-7CFD-40A6-BD76-600E8B942277">
+        <dmn:inputEntry id="_8299EECE-1348-4E18-9FB6-7C9359B00881">
+          <dmn:text>[1..5]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_F8A7A25C-D7AE-4DE0-B177-3A015C8783A6">
+          <dmn:text>"SemiSenior", "Senior"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_AF47103C-F32F-4FA4-8E09-E4D7A908ECD9">
+          <dmn:text>21</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>Si está entre 1 y 5 años, y su Jerarquía es SemiSenior o Senior, tiene 21 días.</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_888A612A-085D-4B21-A7BA-A18C0092B67F">
+        <dmn:inputEntry id="_11747D39-54C5-4190-BB44-98FC094FAE44">
+          <dmn:text>[1..5]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_29546506-9EDF-42D0-9AA6-245FDD10B962">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_3883609A-60C4-4DBF-A637-6750A25F8C3E">
+          <dmn:text>18</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>Si está entre 1 y 5 años, no importando su jerarquía, tiene 18 días.</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_2D6EE2A5-F687-4A5D-A658-1280406FD432">
+        <dmn:inputEntry id="_675FB75E-3B93-400C-A143-238C73BC6EB7">
+          <dmn:text>&gt;5</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_6D922E73-D987-450A-A21D-B6B4E5BEB26A">
+          <dmn:text>"Senior"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_23B4140A-6E9E-4C26-828A-DDF7B5B24BB8">
+          <dmn:text>31</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>pero si es Senior, </dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_B2541290-089D-4C61-8790-CD22A8DC89F3">
+        <dmn:inputEntry id="_3FA9AD27-2AB6-4FE9-91FB-E5411F7830CF">
+          <dmn:text>&gt;5</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_64F8AB4D-1BD1-40EC-9B1F-BF00442D668B">
+          <dmn:text>"SemiSenior"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_078CE0E2-B9B5-4363-9A2B-A2306EA8DC02">
+          <dmn:text>28</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>pero si su Jerarquía es SemiSenior tiene 28 días; </dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_026887CE-1B65-4C1D-9D89-5D014E9CA210">
+        <dmn:inputEntry id="_FC5827CB-16DD-48BE-B953-3335C86AA488">
+          <dmn:text>&gt;5</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_824A59D3-400D-4A2D-9976-8E97436E82DC">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_538217D0-8428-4CB3-8DE6-DB49D8EB7049">
+          <dmn:text>25</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>Si es mayor a 5 años, tiene 25 días; </dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:inputData id="_CBD9BEC5-7ED0-48A8-BA83-480D174255D0" name="jerarquía">
+    <dmn:extensionElements/>
+    <dmn:variable id="_5D096248-A892-4990-848A-0312DF5987C5" name="jerarquía" typeRef="jerarquia"/>
+  </dmn:inputData>
+  <dmn:inputData id="_500A112F-544A-4C76-B7F5-297509E6A49A" name="antig">
+    <dmn:extensionElements/>
+    <dmn:variable id="_879453A9-826A-4090-B17A-334A028B1AFD" name="antig" typeRef="number"/>
+  </dmn:inputData>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_75BC2E26-BB0A-42CF-83E5-0820CEC061FE" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_FD7E32E7-75BB-493C-9AEB-389B7C74C0D4">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>225</kie:width>
+            <kie:width>131</kie:width>
+            <kie:width>1007</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_329FDA71-5E19-4DE5-A306-8AC49207DD78" dmnElementRef="_329FDA71-5E19-4DE5-A306-8AC49207DD78" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="843" y="112" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_CBD9BEC5-7ED0-48A8-BA83-480D174255D0" dmnElementRef="_CBD9BEC5-7ED0-48A8-BA83-480D174255D0" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="931" y="230" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_500A112F-544A-4C76-B7F5-297509E6A49A" dmnElementRef="_500A112F-544A-4C76-B7F5-297509E6A49A" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="777" y="230" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_EC6054A4-D6B4-485C-ADC6-D232DB1C0478-AUTO-TARGET" dmnElementRef="_EC6054A4-D6B4-485C-ADC6-D232DB1C0478">
+        <di:waypoint x="981" y="255"/>
+        <di:waypoint x="893" y="162"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_E61E9D07-155F-4AD0-9C25-D36585F5EDE3-AUTO-TARGET" dmnElementRef="_E61E9D07-155F-4AD0-9C25-D36585F5EDE3">
+        <di:waypoint x="827" y="255"/>
+        <di:waypoint x="893" y="162"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>

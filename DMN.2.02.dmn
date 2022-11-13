@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_9C13608D-4E07-4683-9DC0-1C69C5F64B36" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_C0BA0775-E219-4545-8087-732950D315EE" name="Untitled" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_9C13608D-4E07-4683-9DC0-1C69C5F64B36">
+  <dmn:extensionElements/>
+  <dmn:decision id="_9FAC08A0-89D2-4DDE-89A3-76496D15EBD9" name="Riesgo Deuda">
+    <dmn:extensionElements/>
+    <dmn:variable id="_2C247CF4-89A0-4451-99B5-2AF1C5B98B12" name="Riesgo Deuda" typeRef="string"/>
+    <dmn:informationRequirement id="_F912A8CF-82B6-4DA9-98BE-B2B4A8D7AAFC">
+      <dmn:requiredInput href="#_68E4CC81-6B47-4162-9CF9-453479491421"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_68AF3685-0436-4B5F-842C-1ABAEF50C0EC">
+      <dmn:requiredInput href="#_88615F99-3567-467E-8B83-9521E5628852"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_07FF0F96-EF9E-4623-BCC3-4E8888B426C5" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_ECFC468D-92AD-4829-AE6C-FB80FD3B9258">
+        <dmn:inputExpression id="_EC2BE4E7-85C9-47FD-A358-2D575A93BA77" typeRef="number">
+          <dmn:text>tiempoDeuda</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_6467C0F1-CC3C-4ED6-8893-7491D25308BD">
+        <dmn:inputExpression id="_37E4132C-8F38-494A-B918-7B3C6A10006E" typeRef="number">
+          <dmn:text>montoDeuda</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_621F8724-81A9-46A3-AD22-58CB175AFCB9"/>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_35B9B9A1-96C8-463C-B6C3-CDBF7AF87D97">
+        <dmn:inputEntry id="_837AE548-1C3D-4465-BF61-8472B625E649">
+          <dmn:text>&gt;180</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_682EC39E-3B4E-4A5A-BA55-F8EDAAC445FA">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_D4015BA5-F352-4E96-905A-98285A075017">
+          <dmn:text>"ALTO"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>Si tiene más de 180 días, es ALTO</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_51D36EFE-927A-4E82-BBDE-8A6CF339BA37">
+        <dmn:inputEntry id="_E932109D-C114-4D2D-BF98-97A170C9FFF9">
+          <dmn:text>[90..180]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_214B03A3-271A-4EDC-898A-22255F5588CC">
+          <dmn:text>&gt;2500</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_536C436D-2A85-4864-BEED-D06952FC8FD7">
+          <dmn:text>"ALTO"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>Si tiene entre 90 y 180 días y el monto de deuda es mayor a €2500, es ALTO. </dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_2748A294-7B27-42D3-8D41-12FC5A7A5EAF">
+        <dmn:inputEntry id="_355E9DDF-FDC3-4A77-B9F9-C11D3B709666">
+          <dmn:text>[90..180]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_F701E140-C141-40CB-869B-4F819AD68D9F">
+          <dmn:text>[500..2500]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_7BF830ED-9131-44E7-80C1-D9DDA580A700">
+          <dmn:text>"MEDIO"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>Si tiene entre 90 y 180 días y el monto de deuda está entre €500 y €2500, es MEDIO.</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_EB79CADE-13A2-4A07-9365-BDA4B8238A18">
+        <dmn:inputEntry id="_EF99C351-70F3-4C94-B7A4-4D487D9590C3">
+          <dmn:text>[90..180]</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_A41F5F13-F860-4EC3-90E8-D6DC8B2FBE34">
+          <dmn:text>&lt;500</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_41DB0E0E-E7CC-46F0-B0C8-490DAAC70BFF">
+          <dmn:text>"BAJO"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>ó si tiene entre 90 y 180 días y el monto de deuda es menor a €500, es BAJO.</dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_545FBF23-6DA9-4DF4-ACE6-BE0F547497E8">
+        <dmn:inputEntry id="_BF9EBF14-0F21-44BC-BDAC-431BEC20EB09">
+          <dmn:text>&lt;90</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_79F99F8D-D362-4029-8491-3524340DC1C6">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_FFB8895A-AFC7-4922-9B7E-0947DF308BD1">
+          <dmn:text>"BAJO"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text>Si tiene menos de 90 días ó, </dmn:text>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:inputData id="_68E4CC81-6B47-4162-9CF9-453479491421" name="montoDeuda">
+    <dmn:extensionElements/>
+    <dmn:variable id="_9DDBFF3B-CBE1-4317-8810-1FA0FC2690E9" name="montoDeuda" typeRef="number"/>
+  </dmn:inputData>
+  <dmn:inputData id="_88615F99-3567-467E-8B83-9521E5628852" name="tiempoDeuda">
+    <dmn:extensionElements/>
+    <dmn:variable id="_3C1633CC-C725-4E0C-921F-EADF39D9A6F5" name="tiempoDeuda" typeRef="number"/>
+  </dmn:inputData>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_371F205A-6E4E-40D5-9A1A-3CD4A3836525" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_07FF0F96-EF9E-4623-BCC3-4E8888B426C5">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>746</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_9FAC08A0-89D2-4DDE-89A3-76496D15EBD9" dmnElementRef="_9FAC08A0-89D2-4DDE-89A3-76496D15EBD9" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="321" y="68" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_68E4CC81-6B47-4162-9CF9-453479491421" dmnElementRef="_68E4CC81-6B47-4162-9CF9-453479491421" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="254" y="210" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_88615F99-3567-467E-8B83-9521E5628852" dmnElementRef="_88615F99-3567-467E-8B83-9521E5628852" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="383" y="210" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_F912A8CF-82B6-4DA9-98BE-B2B4A8D7AAFC-AUTO-TARGET" dmnElementRef="_F912A8CF-82B6-4DA9-98BE-B2B4A8D7AAFC">
+        <di:waypoint x="304" y="235"/>
+        <di:waypoint x="371" y="118"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_68AF3685-0436-4B5F-842C-1ABAEF50C0EC-AUTO-TARGET" dmnElementRef="_68AF3685-0436-4B5F-842C-1ABAEF50C0EC">
+        <di:waypoint x="433" y="235"/>
+        <di:waypoint x="371" y="118"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>

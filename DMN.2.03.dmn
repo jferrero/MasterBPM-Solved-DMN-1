@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_38AA68A0-124D-4689-9686-7588BF7FB0A2" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" id="_C0172ADC-0D2E-4F8B-89B2-A657575AB0BF" name="DMN.1" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_38AA68A0-124D-4689-9686-7588BF7FB0A2">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_D366AB20-FBB1-40B7-A425-6147DEA02206" name="tipoContrato" isCollection="false">
+    <dmn:typeRef>string</dmn:typeRef>
+    <dmn:allowedValues kie:constraintType="enumeration" id="_5EDA836D-A206-4EC4-A145-A92E6C258902">
+      <dmn:text>"Negocio", "Privado"</dmn:text>
+    </dmn:allowedValues>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_158D294A-755E-4D88-9E3C-1CE2A6BD52B5" name="tipoContrato">
+    <dmn:extensionElements/>
+    <dmn:variable id="_55C6ABBE-D825-4A57-9EFD-50867679C4EB" name="tipoContrato" typeRef="tipoContrato"/>
+  </dmn:inputData>
+  <dmn:decision id="_C043259F-9F2D-479C-9F08-2392B3069C4C" name="NivelClub">
+    <dmn:extensionElements/>
+    <dmn:variable id="_13F44924-B9D7-4553-8703-B2F4B96319AF" name="NivelClub" typeRef="string"/>
+    <dmn:informationRequirement id="_CE4713F2-06F8-4667-A32C-73CFDC5BF49E">
+      <dmn:requiredInput href="#_158D294A-755E-4D88-9E3C-1CE2A6BD52B5"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_BC7E05B7-DD79-4D40-B2B0-338E3AD1DA5A">
+      <dmn:requiredInput href="#_D955D57F-C2AE-4F7F-B5FD-AFE2458D133B"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_F803A551-00DD-4675-B02C-97BE656D53B5" hitPolicy="UNIQUE" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_BB6BE58B-BDB4-4230-B494-719049A2D121">
+        <dmn:inputExpression id="_B5021D0C-9B2D-48D3-ACBD-AF1045391C45" typeRef="tipoContrato">
+          <dmn:text>tipoContrato</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_8CA7E645-B81B-49E1-903C-65493D3A261C">
+        <dmn:inputExpression id="_0C1BF9CB-DFDB-4372-B038-894799BD4CC8" typeRef="number">
+          <dmn:text>gastoAcum</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_EA00B82A-2E74-4388-996D-D12CD776DD12">
+        <dmn:defaultOutputEntry id="_AA2291FF-BF59-4143-99E9-D7A93AF6C332">
+          <dmn:text>"NO CLIENTE"</dmn:text>
+        </dmn:defaultOutputEntry>
+      </dmn:output>
+      <dmn:annotation name="annotation-1"/>
+      <dmn:rule id="_044EE38F-3D9F-441C-9BBA-3281BB71CECC">
+        <dmn:inputEntry id="_8F28873C-8DB5-4ACD-92B7-19F949A5A2F3">
+          <dmn:text>"Privado"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_7159DCFD-FFB7-4E74-B93C-573BAEB47FE8">
+          <dmn:text>&lt;=1000</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_828C7139-D03D-4718-95F2-43A6C5458C3D">
+          <dmn:text>"STANDARD"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_C81BCF76-7731-4DAD-A1A1-D1820E7A3CB8">
+        <dmn:inputEntry id="_1292D260-15B7-4F47-9911-20B3B8DAA993">
+          <dmn:text>"Negocio"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_4DF91C09-23BC-4E0D-A4CD-25E24F7F3BAD">
+          <dmn:text>&lt;1500</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_06F58C56-7CA2-4EA3-9D7C-30E5D864F254">
+          <dmn:text>"GOLD"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_6862F077-BAEB-49EA-B356-2BEF1B8D8F2B">
+        <dmn:inputEntry id="_C3DFD950-33B7-40ED-B8F2-CA358E46BCC1">
+          <dmn:text>"Privado"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_60F118F7-4193-4075-880F-3C4800106C55">
+          <dmn:text>&gt;1000</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_5F421043-04BC-4BBB-A694-CEC459E30DB4">
+          <dmn:text>"GOLD"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+      <dmn:rule id="_262307A0-CE3B-4BC1-8162-9E62E7991815">
+        <dmn:inputEntry id="_979C81CD-C8D2-4A05-A7FE-3828D7FFB90E">
+          <dmn:text>"Negocio"</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_8F895278-54A5-4C27-8217-179A0B3B7C0C">
+          <dmn:text>&gt;=1500</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_0764EB4F-B9C5-4D40-B527-F8F033B884F0">
+          <dmn:text>"VIP"</dmn:text>
+        </dmn:outputEntry>
+        <dmn:annotationEntry>
+          <dmn:text/>
+        </dmn:annotationEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmn:inputData id="_D955D57F-C2AE-4F7F-B5FD-AFE2458D133B" name="gastoAcum">
+    <dmn:extensionElements/>
+    <dmn:variable id="_1160E611-0C5B-4D8C-B258-6906E4A0A27F" name="gastoAcum" typeRef="number"/>
+  </dmn:inputData>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="_F8896D68-C8C2-413B-B652-5BD98252EB04" name="DRG">
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_F803A551-00DD-4675-B02C-97BE656D53B5">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>100</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-drg-_158D294A-755E-4D88-9E3C-1CE2A6BD52B5" dmnElementRef="_158D294A-755E-4D88-9E3C-1CE2A6BD52B5" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="343" y="222" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_C043259F-9F2D-479C-9F08-2392B3069C4C" dmnElementRef="_C043259F-9F2D-479C-9F08-2392B3069C4C" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="428" y="105" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-drg-_D955D57F-C2AE-4F7F-B5FD-AFE2458D133B" dmnElementRef="_D955D57F-C2AE-4F7F-B5FD-AFE2458D133B" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="521" y="222" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-drg-_CE4713F2-06F8-4667-A32C-73CFDC5BF49E" dmnElementRef="_CE4713F2-06F8-4667-A32C-73CFDC5BF49E">
+        <di:waypoint x="393" y="247"/>
+        <di:waypoint x="478" y="155"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-drg-_BC7E05B7-DD79-4D40-B2B0-338E3AD1DA5A-AUTO-TARGET" dmnElementRef="_BC7E05B7-DD79-4D40-B2B0-338E3AD1DA5A">
+        <di:waypoint x="571" y="247"/>
+        <di:waypoint x="478" y="155"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
